@@ -76,6 +76,7 @@
     .note {
       padding-top: 5px;
       max-height: 30px;
+background: transparent !important;
     }
 
     .music-start {
@@ -105,6 +106,7 @@
       cursor: pointer;
       color: #222;
       animation: glowPulse 2s infinite ease-in-out;
+background: transparent !important;
     }
 
     @keyframes pulse {
@@ -128,7 +130,9 @@
 </head>
 <body>
   <div class="topbar">
-    <button id="muteBtn"><img class="note" src="website-note-icon-small.png" alt="Mute/Unmute"></button>
+<button id="muteBtn">
+  <img id="muteIcon" class="note" src="website-note-icon-small-mute.png" alt="Mute/Unmute">
+</button>
   </div>
 
   <div class="container">
@@ -147,18 +151,21 @@
   </div>
 
   <script>
-    const audio = document.getElementById('bgm');
-    const muteBtn = document.getElementById('muteBtn');
-    const startBtn = document.getElementById('startMusicBtn');
+const audio = document.getElementById('bgm');
+const muteBtn = document.getElementById('muteBtn');
+const muteIcon = document.getElementById('muteIcon');
+const startBtn = document.getElementById('startMusicBtn');
 
     startBtn.onclick = () => {
       audio.muted = false;
       audio.play().catch(e => console.log("Play error:", e));
       startBtn.remove();
+      muteIcon.src = "website-note-icon-small.png";
     };
 
     muteBtn.onclick = () => {
       audio.muted = !audio.muted;
+muteIcon.src = audio.muted ? "website-note-icon-small-mute.png" : "website-note-icon-small.png";
     };
   </script>
 </body>
